@@ -15,8 +15,8 @@ var similarListElement = userDialog.querySelector('.setup-similar-list');
 
 // Шаблон похожего мага
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
-    .content
-    .querySelector('.setup-similar-item');
+  .content
+  .querySelector('.setup-similar-item');
 
 // Функция генерации свойств мага (один элемент объекта)
 var getRandomElement = function (arr) {
@@ -25,16 +25,23 @@ var getRandomElement = function (arr) {
   return arr[randomIndex];
 };
 
+var createWizard = function () {
+  return {
+    name: getRandomElement(WIZARD_NAMES) + ' ' + getRandomElement(WIZARD_SURNAMES),
+    coatColor: getRandomElement(WIZARD_COATS_COLORS),
+    eyesColor: getRandomElement(WIZARD_EYES_COLORS)
+  };
+};
+
 // Функция генерации магов в массив объектов
 var createWizards = function (count) {
   var wizards = [];
 
   for (var i = 0; i < count; i++) {
-    wizards[i].push(getRandomElement(WIZARD_NAMES + '' + WIZARD_SURNAMES),
-                    getRandomElement(WIZARD_COATS_COLORS),
-                    getRandomElement(WIZARD_EYES_COLORS));
+    wizards.push(createWizard());
+  }
 
-
+  return wizards;
 };
 
 // Функция отрисовки мага
@@ -49,6 +56,7 @@ var renderWizard = function (wizard) {
 };
 
 var fragment = document.createDocumentFragment();
+var wizards = createWizards(WIZARDS_COUNT);
 for (var i = 0; i < wizards.length; i++) {
   fragment.appendChild(renderWizard(wizards[i]));
 }
