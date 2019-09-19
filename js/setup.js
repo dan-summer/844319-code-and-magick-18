@@ -2,7 +2,7 @@
 
 var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var WIZARD_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-var WIZARD_COATS_COLORS = ['rgb (101, 137, 164)', 'rgb (241, 43, 107)', 'rgb (146, 100, 161)', 'rgb (56, 159, 117)', 'rgb (215, 210, 55)', 'rgb (0, 0, 0)'];
+var WIZARD_COATS_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var WIZARD_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var WIZARDS_COUNT = 4;
 
@@ -18,13 +18,14 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template')
   .content
   .querySelector('.setup-similar-item');
 
-// Функция генерации свойств мага (один элемент объекта)
+// Функция генерации элемента массива
 var getRandomElement = function (arr) {
   var randomIndex = Math.floor(Math.random() * arr.length);
 
   return arr[randomIndex];
 };
 
+// Функция генерации свойств мага
 var createWizard = function () {
   return {
     name: getRandomElement(WIZARD_NAMES) + ' ' + getRandomElement(WIZARD_SURNAMES),
@@ -33,7 +34,7 @@ var createWizard = function () {
   };
 };
 
-// Функция генерации магов в массив объектов
+// Функция добавления магов в массив
 var createWizards = function (count) {
   var wizards = [];
 
@@ -55,6 +56,7 @@ var renderWizard = function (wizard) {
   return wizardElement;
 };
 
+// Добавление элементов на страницу
 var fragment = document.createDocumentFragment();
 var wizards = createWizards(WIZARDS_COUNT);
 for (var i = 0; i < wizards.length; i++) {
