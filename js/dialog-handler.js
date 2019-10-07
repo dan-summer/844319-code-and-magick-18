@@ -1,7 +1,7 @@
 'use strict';
 
 // Файл dialog-handler
-// Модуль  обработки событий окна(popup)
+// Модуль обработки событий окна(popup)
 (function () {
   var dialogOpen = document.querySelector('.setup-open'); // Иконка с аватаркой
   var dialogWizardNameInput = window.createWizards.userDialog.querySelector('.setup-user-name'); // Строка ввода имени персонажа
@@ -111,7 +111,7 @@
       upEvt.preventDefault();
 
       document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mousemove', onMouseUp);
+      document.removeEventListener('mouseup', onMouseUp);
 
       if (dragged) {
         var onClickPreventDefault = function (clickEvt) {

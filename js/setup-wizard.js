@@ -1,7 +1,7 @@
 'use strict';
 
 // Файл setup-wizard.js
-// Модуль настройки  выбранного мага
+// Модуль настройки выбранного мага
 (function () {
   var wizardSetup = window.createWizards.userDialog.querySelector('.setup-player'); // Блок настроек персонажа
   var wizardCoat = window.createWizards.userDialog.querySelector('.wizard-coat'); // Мантия
