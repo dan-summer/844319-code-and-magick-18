@@ -125,4 +125,9 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
+
+  window.dialogHandler = {
+    closePopup: closePopup
+  };
+
 })();
