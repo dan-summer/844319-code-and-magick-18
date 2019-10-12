@@ -4,8 +4,6 @@
 // Модуль создания магов
 (function () {
   var WIZARDS_COUNT = 4;
-  // var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-  // var WIZARD_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
   var WIZARD_COATS_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
   var WIZARD_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
@@ -23,26 +21,6 @@
     return arr[randomIndex];
   };
 
-  // // Функция генерации свойств мага
-  // var createWizard = function () {
-  //   return {
-  //     name: getRandomElement(WIZARD_NAMES) + ' ' + getRandomElement(WIZARD_SURNAMES),
-  //     coatColor: getRandomElement(WIZARD_COATS_COLORS),
-  //     eyesColor: getRandomElement(WIZARD_EYES_COLORS)
-  //   };
-  // };
-
-  // // Функция добавления магов в массив
-  // var createWizards = function (count) {
-  //   var wizards = [];
-
-  //   for (var i = 0; i < count; i++) {
-  //     wizards.push(createWizard());
-  //   }
-
-  //   return wizards;
-  // };
-
   // Функция отрисовки мага
   var renderWizard = function (wizard) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
@@ -54,17 +32,18 @@
     return wizardElement;
   };
 
-  // Добавление элементов на страницу
+  // Функция обработки успешной загрузки данных
   var successHandler = function (wizards) {
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < WIZARDS_COUNT; i++) {
-      fragment.appendChild(renderWizard(wizards[i]));
+      fragment.appendChild(renderWizard(getRandomElement(wizards)));
     }
     similarListElement.appendChild(fragment);
     userDialog.querySelector('.setup-similar').classList.remove('hidden');
   };
 
+  // Функция обработки неуспешной загрузки данных
   var errorHandler = function (errorMessage) {
     var node = document.createElement('div');
 
@@ -80,6 +59,7 @@
 
   window.backend.load(successHandler, errorHandler);
 
+  // Событие нажатия на кнопку "Сохранить" в окне выбора магов
   userDialogForm.addEventListener('submit', function (evt) {
     window.backend.save(new FormData(userDialogForm), function () {
       window.dialogHandler.closePopup();
