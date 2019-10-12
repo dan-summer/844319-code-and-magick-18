@@ -8,7 +8,7 @@
   var XHR_TIMEOUT = 10000; // Таймаут запроса = 10 сек
   var SUCCESS_REQUEST_STATUS = 200; // Статус успешного запроса
 
-  // Функция загрузки данных на сервер
+  // Функция загрузки данных с сервера
   var load = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
