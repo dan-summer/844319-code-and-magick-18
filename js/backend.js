@@ -10,30 +10,18 @@
 
   // Функция загрузки данных с сервера
   var load = function (onLoad, onError) {
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'json';
-
-    xhr.addEventListener('load', function () {
-      if (xhr.status === SUCCESS_REQUEST_STATUS) {
-        onLoad(xhr.response);
-      } else {
-        onError('Статус ответа: ' + xhr.status + xhr.statusText);
-      }
-    });
-    xhr.addEventListener('error', function () {
-      onError('Произошла ошибка соединения');
-    });
-    xhr.addEventListener('timeout', function () {
-      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
-    });
-    xhr.timeout = XHR_TIMEOUT;
-
-    xhr.open('GET', LOAD_URL);
+    var xhr = xhrSetup('GET', LOAD_URL, onLoad, onError);
     xhr.send();
   };
 
   // Функция отправки данных на сервер
   var save = function (data, onLoad, onError) {
+    var xhr = xhrSetup('POST', SAVE_URL, onLoad, onError);
+    xhr.send(data);
+  };
+
+  // Функция - паттерн DRY
+  var xhrSetup = function (method, url, onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -51,9 +39,9 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
     xhr.timeout = XHR_TIMEOUT;
+    xhr.open(method, url);
 
-    xhr.open('POST', SAVE_URL);
-    xhr.send(data);
+    return xhr;
   };
 
   window.backend = {
