@@ -45,16 +45,16 @@
 
   // Функция обработки неуспешной загрузки данных
   var errorHandler = function (errorMessage) {
-    var node = document.createElement('div');
+    var divElement = document.createElement('div');
 
-    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    node.style.position = 'absolute';
-    node.style.left = 0;
-    node.style.right = 0;
-    node.style.fontSize = '30px';
-    node.textContent = errorMessage;
+    divElement.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+    divElement.style.position = 'absolute';
+    divElement.style.left = 0;
+    divElement.style.right = 0;
+    divElement.style.fontSize = '30px';
+    divElement.textContent = errorMessage;
 
-    document.body.insertAdjacentHTML('afterbegin', node);
+    document.body.insertAdjacentElement('afterbegin', divElement);
   };
 
   window.backend.load(successHandler, errorHandler);
