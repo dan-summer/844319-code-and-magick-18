@@ -10,19 +10,13 @@
   var wizardEyes = window.createWizard.userDialog.querySelector('.wizard-eyes'); // Глаза
   var wizardFireball = window.createWizard.userDialog.querySelector('.setup-fireball-wrap'); // Фаербол
 
-  var wizard = {
-    onCoatChange: function (color) {},
-    onEyesChange: function (color) {}
-    // onFireBallChange: function (color) {}
-  };
-
   // Событие клика (изменение цвета мантии случайным образом)
   wizardCoat.addEventListener('click', function () {
     var newColor = window.createWizard.getRandomElement(window.createWizard.WIZARD_COATS_COLORS);
 
     wizardCoat.style = 'fill: ' + newColor;
-    // wizardSetup.querySelector('input[name="coat-color"]').value = newColor;
-    wizard.onCoatChange(newColor);
+    wizardSetup.querySelector('input[name="coat-color"]').value = newColor;
+    window.filter.onCoatChange(newColor);
   });
 
   // Событие клика (изменение цвета глаз случайным образом)
@@ -30,8 +24,8 @@
     var newColor = window.createWizard.getRandomElement(window.createWizard.WIZARD_EYES_COLORS);
 
     wizardEyes.style = 'fill: ' + newColor;
-    // wizardSetup.querySelector('input[name="eyes-color"]').value = newColor;
-    wizard.onEyesChange(newColor);
+    wizardSetup.querySelector('input[name="eyes-color"]').value = newColor;
+    window.filter.onEyesChange(newColor);
   });
 
   // Событие клика (изменение цвета фаербола случайным образом)
@@ -40,10 +34,5 @@
 
     wizardFireball.style = 'background-color: ' + newColor;
     wizardSetup.querySelector('input[name="fireball-color"]').value = newColor;
-    // wizard.onFireBallChange(newColor);
   });
-  window.wizard = wizard;
-
-  return wizard;
-
 })();

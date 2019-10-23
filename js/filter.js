@@ -5,9 +5,9 @@
 (function () {
   var coatColor;
   var eyesColor;
-  // var fireballColor;
   var wizards = [];
 
+  // Функция получения рейтинга магов
   var getRank = function (wizard) {
     var rank = 0;
 
@@ -21,6 +21,7 @@
     return rank;
   };
 
+  // Функция отрисовки похожих, отфильтрованных магов
   var updateWizards = function () {
     window.createWizard.renderSimilarWizards(wizards.slice().
       sort(function (left, rigth) {
@@ -33,21 +34,19 @@
       }));
   };
 
-  window.wizard.onCoatChange = function (color) {
+  // Функция обработки события изменения цвета мантии
+  var onCoatChange = window.debounceElimination.debounce(function (color) {
     coatColor = color;
     updateWizards();
-  };
+  });
 
-  window.wizard.onEyesChange = function (color) {
+  // Функция обработки события изменения цвета глаз
+  var onEyesChange = window.debounceElimination.debounce(function (color) {
     eyesColor = color;
     updateWizards();
-  };
+  });
 
-  // window.wizard.onFireBallChange = function (color) {
-  //   fireballColor = color;
-  //   updateWizards();
-  // };
-
+  // Функция обработки успешной загрузки данных
   var successHandler = function (data) {
     wizards = data;
     updateWizards();
@@ -70,6 +69,8 @@
   window.backend.load(successHandler, errorHandler);
 
   window.filter = {
+    onCoatChange: onCoatChange,
+    onEyesChange: onEyesChange,
     errorHandler: errorHandler
   };
 })();

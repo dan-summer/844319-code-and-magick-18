@@ -34,7 +34,6 @@
 
   // Функция обработки успешной загрузки данных
   var renderSimilarWizards = function (wizards) {
-    // var fragment = document.createDocumentFragment();
     var similarWizardsCount = wizards.length > WIZARDS_COUNT ? WIZARDS_COUNT : wizards.length;
     similarListElement.innerHTML = '';
 
