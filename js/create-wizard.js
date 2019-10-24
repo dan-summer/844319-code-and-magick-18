@@ -33,44 +33,30 @@
   };
 
   // Функция обработки успешной загрузки данных
-  var successHandler = function (wizards) {
-    var fragment = document.createDocumentFragment();
+  var renderSimilarWizards = function (wizards) {
+    var similarWizardsCount = wizards.length > WIZARDS_COUNT ? WIZARDS_COUNT : wizards.length;
+    similarListElement.innerHTML = '';
 
-    for (var i = 0; i < WIZARDS_COUNT; i++) {
-      fragment.appendChild(renderWizard(getRandomElement(wizards)));
+    for (var i = 0; i < similarWizardsCount; i++) {
+      similarListElement.appendChild(renderWizard(wizards[i]));
     }
-    similarListElement.appendChild(fragment);
+
     userDialog.querySelector('.setup-similar').classList.remove('hidden');
   };
-
-  // Функция обработки неуспешной загрузки данных
-  var errorHandler = function (errorMessage) {
-    var divElement = document.createElement('div');
-
-    divElement.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    divElement.style.position = 'absolute';
-    divElement.style.left = 0;
-    divElement.style.right = 0;
-    divElement.style.fontSize = '30px';
-    divElement.textContent = errorMessage;
-
-    document.body.insertAdjacentElement('afterbegin', divElement);
-  };
-
-  window.backend.load(successHandler, errorHandler);
 
   // Событие нажатия на кнопку "Сохранить" в окне выбора магов
   userDialogForm.addEventListener('submit', function (evt) {
     window.backend.save(new FormData(userDialogForm), function () {
       window.dialogHandler.closePopup();
-    }, errorHandler);
+    }, window.filter.errorHandler);
     evt.preventDefault();
   });
 
-  window.createWizards = {
+  window.createWizard = {
     WIZARD_COATS_COLORS: WIZARD_COATS_COLORS,
     WIZARD_EYES_COLORS: WIZARD_EYES_COLORS,
     userDialog: userDialog,
+    renderSimilarWizards: renderSimilarWizards,
     getRandomElement: getRandomElement
   };
 })();

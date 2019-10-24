@@ -4,14 +4,14 @@
 // Модуль обработки событий окна(popup)
 (function () {
   var dialogOpen = document.querySelector('.setup-open'); // Иконка с аватаркой
-  var dialogWizardNameInput = window.createWizards.userDialog.querySelector('.setup-user-name'); // Строка ввода имени персонажа
-  var dialogHandler = window.createWizards.userDialog.querySelector('.upload'); // Иконка для перемещения окна
-  var dialogClose = window.createWizards.userDialog.querySelector('.setup-close'); // Крестик окна
+  var dialogWizardNameInput = window.createWizard.userDialog.querySelector('.setup-user-name'); // Строка ввода имени персонажа
+  var dialogHandler = window.createWizard.userDialog.querySelector('.upload'); // Иконка для перемещения окна
+  var dialogClose = window.createWizard.userDialog.querySelector('.setup-close'); // Крестик окна
 
   var USER_DIALOG_START_TOP = 80; // в пикселях
   var USER_DIALOG_START_LEFT = 50; // в процентах
 
-  window.createWizards.userDialog.querySelector('.setup-similar').classList.remove('hidden');
+  window.createWizard.userDialog.querySelector('.setup-similar').classList.remove('hidden');
 
   // Событие, когда поле ввода в фокусе
   dialogWizardNameInput.addEventListener('focus', function () {
@@ -25,7 +25,7 @@
 
   // Функция открытия окна
   var openPopup = function () {
-    window.createWizards.userDialog.classList.remove('hidden');
+    window.createWizard.userDialog.classList.remove('hidden');
     document.addEventListener('keydown', onPopupEscPress);
   };
 
@@ -38,7 +38,7 @@
 
   // Функция закрытия окна
   var closePopup = function () {
-    window.createWizards.userDialog.classList.add('hidden');
+    window.createWizard.userDialog.classList.add('hidden');
     resetUserDialogCoords();
     document.removeEventListener('keydown', onPopupEscPress);
   };
@@ -59,8 +59,8 @@
 
   // Функция сброса координат(положения) окна
   var resetUserDialogCoords = function () {
-    window.createWizards.userDialog.style.top = USER_DIALOG_START_TOP + 'px';
-    window.createWizards.userDialog.style.left = USER_DIALOG_START_LEFT + '%';
+    window.createWizard.userDialog.style.top = USER_DIALOG_START_TOP + 'px';
+    window.createWizard.userDialog.style.left = USER_DIALOG_START_LEFT + '%';
   };
 
   // Событие открытия окна
@@ -103,8 +103,8 @@
         y: moveEvt.clientY
       };
 
-      window.createWizards.userDialog.style.top = (window.createWizards.userDialog.offsetTop - shift.y) + 'px';
-      window.createWizards.userDialog.style.left = (window.createWizards.userDialog.offsetLeft - shift.x) + 'px';
+      window.createWizard.userDialog.style.top = (window.createWizard.userDialog.offsetTop - shift.y) + 'px';
+      window.createWizard.userDialog.style.left = (window.createWizard.userDialog.offsetLeft - shift.x) + 'px';
     };
 
     var onMouseUp = function (upEvt) {
